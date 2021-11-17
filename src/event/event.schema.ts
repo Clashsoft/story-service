@@ -1,6 +1,6 @@
 import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 import {ApiProperty, getSchemaPath} from '@nestjs/swagger';
-import {IsArray, IsDate, IsMongoId, IsNotEmpty, IsString} from 'class-validator';
+import {IsArray, IsDateString, IsMongoId, IsNotEmpty, IsString} from 'class-validator';
 import {Document} from 'mongoose';
 
 export class Reference {
@@ -29,7 +29,7 @@ export class Event {
 
   @Prop({index: 1})
   @ApiProperty()
-  @IsDate()
+  @IsDateString()
   timestamp: Date;
 
   @Prop()
