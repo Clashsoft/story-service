@@ -19,7 +19,7 @@ export class EventService {
   }
 
   async findAll(query: FilterQuery<Event>): Promise<EventDocument[]> {
-    return this.model.find(query).exec();
+    return this.model.find(query).sort('timestamp').exec();
   }
 
   async findOne(story: string, id: string): Promise<EventDocument | null> {
