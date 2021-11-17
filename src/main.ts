@@ -5,6 +5,8 @@ import {environment} from './environment';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const prefix = `/api/${environment.version}`;
+  app.setGlobalPrefix(prefix);
   app.enableCors();
 
   const config = new DocumentBuilder()
@@ -13,7 +15,7 @@ async function bootstrap() {
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup(prefix, app, document);
 
   await app.listen(environment.port);
 }
