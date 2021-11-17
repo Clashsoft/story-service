@@ -1,5 +1,5 @@
-import {Body, Controller, Delete, Get, Param, Patch, Post} from '@nestjs/common';
-import {ApiCreatedResponse, ApiExtraModels, ApiOkResponse, ApiTags} from '@nestjs/swagger';
+import {Body, Controller, Delete, Get, Param, Patch, Post, Query} from '@nestjs/common';
+import {ApiCreatedResponse, ApiExtraModels, ApiOkResponse, ApiQuery, ApiTags} from '@nestjs/swagger';
 import {FilterQuery} from 'mongoose';
 import {CreateEventDto, UpdateEventDto} from './event.dto';
 import {Event, Reference} from './event.schema';
@@ -20,9 +20,10 @@ export class EventController {
 
   @Get('')
   @ApiOkResponse({type: [Event]})
+  @ApiQuery({name: 'reference', description: 'Reference ID to filter by'})
   async findAll(
     @Param('story') story: string,
-    @Param('reference') reference?: string,
+    @Query('reference') reference?: string,
   ): Promise<Event[]> {
     const filter: FilterQuery<Event> = {story};
     reference && (filter['description.id'] = reference);
