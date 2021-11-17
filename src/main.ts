@@ -1,3 +1,4 @@
+import {ValidationPipe} from '@nestjs/common';
 import {NestFactory} from '@nestjs/core';
 import {DocumentBuilder, SwaggerModule} from '@nestjs/swagger';
 import {AppModule} from './app.module';
@@ -8,6 +9,7 @@ async function bootstrap() {
   const prefix = `/api/${environment.version}`;
   app.setGlobalPrefix(prefix);
   app.enableCors();
+  app.useGlobalPipes(new ValidationPipe());
 
   const config = new DocumentBuilder()
     .setTitle('Story Service')
