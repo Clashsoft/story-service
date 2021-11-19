@@ -1,6 +1,6 @@
 import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
-import {ApiProperty} from '@nestjs/swagger';
-import {IsNotEmpty, IsObject, IsString} from 'class-validator';
+import {ApiProperty, ApiPropertyOptional} from '@nestjs/swagger';
+import {IsNotEmpty, IsObject, IsOptional, IsString, IsUrl} from 'class-validator';
 import {Document} from 'mongoose';
 
 @Schema()
@@ -19,6 +19,12 @@ export class Entry {
   @IsString()
   @IsNotEmpty()
   type: string;
+
+  @Prop()
+  @ApiPropertyOptional({type: 'url'})
+  @IsOptional()
+  @IsUrl()
+  imageUrl?: string;
 
   @Prop()
   @ApiProperty()
