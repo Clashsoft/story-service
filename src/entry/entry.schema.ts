@@ -40,6 +40,8 @@ export class Entry {
 export type EntryDocument = Entry & Document;
 
 export const EntrySchema = SchemaFactory.createForClass(Entry)
-  .index({name: 'text'})
-  .index({description: 'text'})
+  .index({
+    name: 'text',
+    description: 'text',
+  })
 ;
