@@ -38,6 +38,14 @@ export class EntryController {
     return this.entryService.findAll(query);
   }
 
+  @Get('types')
+  @ApiOkResponse({type: [String]})
+  async findTypes(
+    @Param('story') story: string,
+  ): Promise<string[]> {
+    return this.entryService.findTypes({story});
+  }
+
   @Get(':id')
   @ApiOkResponse({type: Entry})
   async findOne(@Param('story') story: string, @Param('id') id: string): Promise<Entry | null> {

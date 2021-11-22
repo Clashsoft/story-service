@@ -22,6 +22,10 @@ export class EntryService {
     return this.model.find(query).sort('name').exec();
   }
 
+  async findTypes(query: FilterQuery<Entry>): Promise<string[]> {
+    return this.model.find(query).distinct('type').exec();
+  }
+
   async findOne(story: string, id: string): Promise<EntryDocument | null> {
     return this.model.findById(id).where(story, id).exec();
   }
