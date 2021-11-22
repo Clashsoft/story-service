@@ -25,11 +25,15 @@ export class EntryController {
   })
   async findAll(
     @Param('story') story: string,
+    @Query('type') type?: string,
     @Query('search') search?: string,
   ): Promise<Entry[]> {
     const query: FilterQuery<Entry> = {story};
     if (search) {
       query.$text = {$search: search};
+    }
+    if (type) {
+      query.type = type;
     }
     return this.entryService.findAll(query);
   }
